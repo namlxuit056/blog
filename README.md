@@ -1,3 +1,3 @@
 # blog
 
-# Make blog mysefl
+# Make blog myself
