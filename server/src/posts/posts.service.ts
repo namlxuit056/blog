@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
 import { NewPostInput } from './dto/new-post.input';
 import { PostsArgs } from './dto/posts.args';
 import { Post } from './models/post';
 import { DateScalar } from '../common/scalars/date.scalar';
+import { InjectModel } from '@nestjs/mongoose';
 @Injectable()
 export class PostsService {
+  constructor(@InjectModel('Post') private readonly catModel: Model<Post>) {}
   /**
    * MOCK
    * Put some real business logic here
@@ -12,7 +15,7 @@ export class PostsService {
    */
 
   async create(data: NewPostInput): Promise<Post> {
-    const post = Object.assign(data, { id: '1', creationDate: new Date() });
+    const creatPost = new this.postModel(data);
     return post;
   }
 
