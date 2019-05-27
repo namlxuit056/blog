@@ -1,11 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  ObjectID,
+  ObjectIdColumn,
+} from 'typeorm';
 import { IsEmail, Validate } from 'class-validator';
 import * as crypto from 'crypto';
 
-@Entity('user')
+@Entity()
 export class UserEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectID;
 
   @Column()
   username: string;
@@ -26,8 +33,8 @@ export class UserEntity {
   @Column()
   phone: string;
 
-  @BeforeInsert()
-  hashPassword() {
-    this.password = crypto.createHmac('sha256', this.password).digest('hex');
-  }
+  // @BeforeInsert()
+  // hashPassword() {
+  //   this.password = crypto.createHmac('sha256', this.password).digest('hex');
+  // }
 }

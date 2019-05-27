@@ -1,13 +1,14 @@
 import { NotFoundException, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Resolver, Query } from 'type-graphql';
 import { PubSub } from 'apollo-server-express';
 import { UsersService } from './users.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UserEntity } from './user.entity';
+import { User } from 'src/schemas/user.schema';
 
 const pubSub = new PubSub();
 
-@Resolver('User')
+@Resolver(of => UserEntity)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
@@ -19,9 +20,8 @@ export class UsersResolver {
   //   }
   //   return user;
   // }
-
-  @Query('users')
-  async users(): Promise<UserEntity[]> {
+  @Query(returns => [UserEntity])
+  public async getItems(): Promise<UserEntity[]> {
     return this.usersService.findAll();
   }
 
