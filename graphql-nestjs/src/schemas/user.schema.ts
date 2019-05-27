@@ -1,9 +1,15 @@
-import * as mongoose from 'mongoose';
+import { AppolloError } from 'apollo-server-express';
 
-export const UserSchema = new mongoose.Schema({
-  fullName: String,
-  email: String,
-  password: String,
-  gender: String,
-  phone: String,
-});
+export class User {
+  id?: string;
+  username: string;
+  password: string;
+  email: string;
+  fullName: string;
+  gender: string;
+  phone: string;
+}
+// tslint:disable-next-line:max-classes-per-file
+export abstract class IQuery {
+  abstract getUsers(): User[] | Promise<User[] | AppolloError> | AppolloError;
+}

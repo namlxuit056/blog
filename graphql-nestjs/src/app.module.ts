@@ -3,12 +3,21 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PostsModule } from './posts/posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    PostsModule,
+    // PostsModule,
     UsersModule,
-    MongooseModule.forRoot('mongodb://localhost/blog'),
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      host: 'localhost',
+      port: 27017,
+      database: 'blog',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    // MongooseModule.forRoot('mongodb://localhost/blog'),
     GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
