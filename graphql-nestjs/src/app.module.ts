@@ -7,7 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    // PostsModule,
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
@@ -17,10 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    // MongooseModule.forRoot('mongodb://localhost/blog'),
     GraphQLModule.forRoot({
-      installSubscriptionHandlers: true,
-      autoSchemaFile: 'schema.gql',
+      typePaths: ['./**/*.graphql'],
     }),
   ],
 })

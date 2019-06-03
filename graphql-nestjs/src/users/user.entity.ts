@@ -1,11 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  ObjectID,
+  ObjectIdColumn,
+} from 'typeorm';
 import { IsEmail, Validate } from 'class-validator';
 import * as crypto from 'crypto';
 
 @Entity('user')
 export class UserEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: string;
 
   @Column()
   username: string;
