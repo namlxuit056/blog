@@ -1,0 +1,30 @@
+type Query {
+  users: [User]
+  user(id: ID!): User
+  findOneByEmail: User
+}
+
+type Mutation {
+  createUser(user: UserInput!): User
+  removeUser(id: String!): Boolean
+  updateUser(id: String!, data: UserInput!): Boolean
+}
+
+type User {
+  id: ID
+  username: String
+  password: String
+  email: String
+  gender: Boolean
+  phone: String
+  fullName: String
+}
+
+input UserInput {
+  username: String!
+  password: String!
+  email: String!
+  fullName: String!
+  gender: Boolean
+  phone: String
+}
