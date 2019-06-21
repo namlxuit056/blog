@@ -2,7 +2,7 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { UserEntity } from './user.entity';
-import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Resolver('User')
 export class UsersResolver {
@@ -27,7 +27,7 @@ export class UsersResolver {
   }
 
   @Query('users')
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async users(): Promise<UserEntity[]> {
     return this.usersService.findAll();
   }

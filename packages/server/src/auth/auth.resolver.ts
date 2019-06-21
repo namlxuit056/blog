@@ -1,5 +1,7 @@
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { UnauthorizedException } from '@nestjs/common';
 
 @Resolver('Auth')
 export class AuthResolver {

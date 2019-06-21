@@ -5,7 +5,6 @@ import { NewPostInput } from './dto/new-post.input';
 import { PostsArgs } from './dto/posts.args';
 import { Post } from './models/post';
 import { PostsService } from './posts.service';
-import { AuthGuard } from 'src/auth/auth.guard';
 
 const pubSub = new PubSub();
 
@@ -27,7 +26,6 @@ export class PostsResolver {
     return this.postsService.findAll(postsArgs);
   }
 
-  @UseGuards(AuthGuard)
   @Mutation(returns => Post)
   async addPost(@Args('newPostData') newPostData: NewPostInput): Promise<Post> {
     const post = await this.postsService.create(newPostData);
